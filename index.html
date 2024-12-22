@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biscoito da Sorte</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #ff7e5f, #feb47b, #86a8e7, #7f7fd5);
+            background-size: 400% 400%;
+            animation: gradientBackground 15s ease infinite;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+        @keyframes gradientBackground {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .button {
+            background-color: #fff;
+            border: none;
+            border-radius: 50px;
+            padding: 20px 40px;
+            font-size: 24px;
+            color: #ff7e5f;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 126, 95, 0.4);
+            animation: pulse 2s infinite;
+            transition: transform 0.2s;
+        }
+        .button:hover {
+            transform: scale(1.05);
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .message {
+            font-size: 36px;
+            color: #fff;
+            text-align: center;
+            margin-top: 20px;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #fff;
+            border-radius: 50%;
+            animation: fall 3s linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-100vh) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div id="message" class="message"></div>
+    <button class="button" onclick="showMessage()">Clique e Receba Seu Biscoito da Sorte</button>
+    <script>
+        const messages = [
+            "Caiu na rede é peixe, mas cuidado: nem todo peixe é filé.",
+            "Se correr o bicho pega, se ficar o bicho come. Melhor aprender a dançar com o bicho.",
+            "A pressa é inimiga da perfeição, mas às vezes é aliada da sorte.",
+            "Quem ri por último provavelmente não entendeu a piada.",
+            "Paciência é uma virtude, mas café resolve mais rápido.",
+            "Não ponha todos os ovos na mesma cesta, especialmente se a cesta for de vime barato.",
+            "Quem tem boca vai a Roma, mas quem tem dinheiro chega de avião.",
+            "A vida é um jogo, mas nem sempre você tem o controle na mão.",
+            "Mais vale um pássaro na mão do que dois voando, mas cuidado para não se sujar.",
+            "O mundo dá voltas, mas às vezes é você que está andando em círculos.",
+            "Águas passadas não movem moinhos, mas podem virar meme.",
+            "O barato pode sair caro, mas o caro nunca é barato.",
+            "O melhor amigo do homem é o cachorro, porque ele não lê suas mensagens.",
+            "Nem tudo que reluz é ouro, às vezes é só purpurina.",
+            "Quem nunca errou que atire a primeira pedra, mas por favor, mire longe.",
+            "Roupa suja se lava em casa, mas fofoca limpa no grupo do WhatsApp.",
+            "Se a vida te der limões, faça caipirinha e cobre entrada na festa.",
+            "Quem avisa amigo é, mas quem insiste é sua mãe.",
+            "A grama do vizinho é mais verde, mas o boleto é maior.",
+            "Sorte no amor, azar no jogo... ou será o contrário?",
+            "No Brasil, até o 'vou ali e já volto' pode ser cheio de surpresas.",
+            "Quem planta vento colhe tempestade, mas quem planta meme colhe curtidas."
+        ];
+
+        function showMessage() {
+            const messageElement = document.getElementById('message');
+            messageElement.textContent = messages[Math.floor(Math.random() * messages.length)];
+            messageElement.style.opacity = 0;
+            setTimeout(() => {
+                messageElement.style.opacity = 1;
+                launchConfetti();
+            }, 10);
+        }
+
+        function launchConfetti() {
+            const confettiCount = 50;
+            for (let i = 0; i < confettiCount; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
+                confetti.style.animationDelay = Math.random() * 2 + 's';
+                confetti.style.backgroundColor = ['#ff7e5f', '#feb47b', '#86a8e7', '#7f7fd5'][Math.floor(Math.random() * 4)];
+                document.body.appendChild(confetti);
+                confetti.addEventListener('animationend', () => confetti.remove());
+            }
+        }
+    </script>
+</body>
+</html>
